@@ -60,25 +60,26 @@ while ($calculateMore == true) { // while it's true the calculator will keep run
     if ($correctOperator == true) {
         switch ($operand) {
             case "+":
-                echo "The result is " . $number1 + $number2 . "\n";
+                $result = $number1 + $number2;
                 break;
             case "-":
-                echo "The result is " . $number1 - $number2 . "\n";
+                $result = $number1 - $number2;
                 break;
             case "/":
                 if ($number2 == 0) {
                     echo "You cannot perform this operation";
                     die(); // Exits the program if divider(number2) == 0"
                 } else {
-                    echo "The result is " . $number1 / $number2 . "\n";
+                    $result = $number1 / $number2;
                 }
                 break;
             case "*":
-                echo "The result is " . $number1 * $number2 . "\n";
+                $result = $number1 * $number2;
                 break;
             default:
                 echo "Thanks!";
-        }
+        }   
+        echo "The result is " . $result . "\n";
     }
 
     echo "\n";
