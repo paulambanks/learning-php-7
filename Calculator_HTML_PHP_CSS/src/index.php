@@ -71,7 +71,7 @@
 
             <div class="calculator">
                 <h1 class="title">CALCULATOR</h1>
-                <form method="POST" action="Calculator.php">
+                <form method="POST" action="index.php">
                     <input type="text" name="first" class="num" autocomplete="off" placeholder="Enter the first number">
                     <input type="text" name="second" class="num" autocomplete="off" placeholder="Enter the second number">
                     <?php echo ($errorMsg !== null)?'<p class="error-msg"><i class="fas fa-exclamation-circle"></i> ERROR: ' . $errorMsg . '</p>':null; ?>
