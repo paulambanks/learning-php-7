@@ -1,0 +1,14 @@
+.calendar {
+  width: 400px;
+  text-align: center;
+  border-style: solid;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+.calendar-main-table {
+  width: 100%;
+}
+.table-week-day-list {
+  width: 100%;
+}
+

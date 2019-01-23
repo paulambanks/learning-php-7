@@ -24,13 +24,13 @@
         <nav class="nav"> 
             <ul class="nav-list"> 
                 <li class="nav-list-item"> 
-                    <a class="nav-list-item-link" href="#">HOME</a> 
+                    <a class="nav-list-item-link" href="index.php">HOME</a> 
                 </li> 
                 <li class="nav-list-item"> 
-                    <a class="nav-list-item-link" href="#">CALENDAR</a> 
+                    <a class="nav-list-item-link" href="calendar.php">CALENDAR</a> 
                 </li> 
                 <li class="nav-list-item"> 
-                    <a class="nav-list-item-link" href="Calculator.php">CALCULATOR</a> 
+                    <a class="nav-list-item-link" href="calculator.php">CALCULATOR</a> 
                 </li> 
             </ul>
         </nav>
