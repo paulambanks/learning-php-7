@@ -1,126 +1,116 @@
 <?php
 
-$calculateMore = true; // Open a loop for calculator and choice of continuing the calculations
-
-while ($calculateMore == true) { // while it's true the calculator will keep running
-    
-  // Ask user to pick a first number
-  
-    echo "Pick the first number: \n";
-    $number1 = stream_get_line(STDIN, 100, "\n");
-
-    // Test if user picked a valid number
-
-    while (!is_numeric($number1)) {
-        // Loop that user enters when provides an incorrect/invalid number. 
-        //Function is_numeric($var) checks if a $var is numeric.
-        echo "Sorry, seems like you did not pick a valid number\n";
-        echo "Pick a first number again: \n";
-        $number1 = stream_get_line(STDIN, 100, "\n");
-    }
-
-    // If user picked a valid number1, ask user to pick a second number
-
-    echo "Thank you. Now please pick a second number: \n";
-    $number2 = stream_get_line(STDIN, 100, "\n");
-
-    // Again test if user picked a valid number
-
-    while (!is_numeric($number2)) {
-        // Loop that user enters when provides an incorrect/invalid number. 
-        // Function is_numeric($var) checks if a $var is numeric.
-        echo "Sorry, seems like you did not pick a valid number\n";
-        echo "Pick a second number again: \n";
-        $number2 = stream_get_line(STDIN, 100, "\n");
-    }
-
-    // Ask user to pick an operand
-
-    echo "Thank you, now please pick the operand. Please keep choices to '+, -, *, /' \n";
-    $operand = stream_get_line(STDIN, 100, "\n");
-
-    // Check if the operand is valid
-    $correctOperator = false;
-
-    if ($operand == "+" || $operand == "-" || $operand == "*" || $operand == "/") {
-        $correctOperator = true;
-    } else {
-        $correctOperator = false;
-
-        while ($correctOperator == false) {
-            echo "wrong operator\n";
-            echo "Please pick your operand: \n";
-            $operand = stream_get_line(STDIN, 100, "\n");
-            if ($operand == "+" || $operand == "-" || $operand == "*" || $operand == "/") {
-                $correctOperator = true; // If user finally provides a valid operand he gets back to main loop and accept the operand as valid.
-            }
-        }
-    }
-    // Knowing now that the operand is correct, apply calculations
-    if ($correctOperator == true) {
-        switch ($operand) {
-            case "+":
-                $result = $number1 + $number2;
-                break;
-            case "-":
-                $result = $number1 - $number2;
-                break;
-            case "/":
-                if ($number2 == 0) {
-                    echo "You cannot perform this operation";
-                    die(); // Exits the program if divider(number2) == 0"
-                } else {
-                    $result = $number1 / $number2;
-                }
-                break;
-            case "*":
-                $result = $number1 * $number2;
-                break;
-            default:
-                echo "Thanks!";
-        }   
-        echo "The result is " . $result . "\n";
-    }
-
-    echo "\n";
-
-    // Ask the user whether he would you like to continue calculations
-
-    echo "Would you like to calculate more?(y/n): \n";
-    $answer = stream_get_line(STDIN, 100, "\n");
-
-    // Test whether the answer is Y or N.
-    $correctAnswer = false;
-
-    if ($answer == "y" || $answer == "n") {
-        $correctAnswer = true;
-    } else {
-        $correctAnswer = false;
-
-        while ($correctAnswer == false) {
-            echo "Sorry didn't get it \n";
-            echo "Would you like to calculate more?(y/n): \n";
-            $answer = stream_get_line(STDIN, 100, "\n");
-            if ($answer == "y" || $answer == "n") {
-                $correctAnswer = true; // If user finally provides a valid answer he gets back to main loop and accept the answer as valid.
-            }
-        }
-    }
-    // Knowing now that the answer is correct, apply the decision
-    if ($correctAnswer == true) {
-        switch ($answer) {
-            case "y":
-                $calculateMore = true; // keeps asking for numbers
-                break;
-
-            case "n":
-                $calculateMore = false; 
-                echo "Thanks for being with us!\n";  // finish calculations
-                break;
-            
-            default:
-                echo "Thanks";
-        }
-    }
+// Test if the operator is valid
+function validOperator($operator) {
+    $validOperators = array("+", "-", "*", "/");
+    return in_array($operator, $validOperators);
 }
 
+// Return operator if valid or prompt the user if invalid
+function promptOperator() {
+    $operator = stream_get_line(STDIN, 100, "\n");
+    if (validOperator($operator)) {
+        return $operator;
+    }
+    do {
+        echo "Wrong operator\n";
+        echo "Please pick your operator: \n";
+        $operator = stream_get_line(STDIN, 100, "\n");
+    } while (!validOperator($operator));
+    
+    return $operator;
+}
+
+// Return number if valid or prompt the user if invalid
+function promptNumber() {
+    $number = stream_get_line(STDIN, 100, "\n");
+    if (is_numeric($number)) { 
+        return $number;
+    }
+    do {
+        echo "Sorry, seems like you did not pick a valid number\n";
+        echo "Pick a number again: \n";
+        $number = stream_get_line(STDIN, 100, "\n");
+    } while (!is_numeric($number));
+    
+    return $number;
+}
+// Test if the user's answer is valid
+function validAnswer($answer) {
+  $validAnswer = array("Y", "N", "y", "n");
+  return in_array($answer, $validAnswer);
+}
+
+// Return user's answer if valid or prompt the user if invalid
+function promptNextCalculation() {
+  $answer = stream_get_line(STDIN, 100, "\n");
+  if (validAnswer($answer)) {
+    return $answer;
+  }
+  do {
+    echo "I didn't get it\n";
+    echo "Would you like to calculate again?: \n";
+    $answer = stream_get_line(STDIN, 100, "\n");
+  } while (!validAnswer($answer));
+   
+  return $answer;
+}
+
+// Acts on user's response to continue calculations
+function calculateMore($answer) {
+  switch ($answer) {
+    case "y":
+        $calculateMore = true; // keeps asking for numbers
+        break;
+
+    case "n":
+        $calculateMore = false;
+        echo "Thanks for being with us!\n";  // finish calculations
+        die(); 
+        break;
+    }
+    return $calculateMore;
+}
+// Performs calculations
+function calculate($first, $second, $operator) {
+    switch ($operator) {
+        case "+":
+            $result = $first + $second;
+            break;
+        case "-":
+            $result = $first - $second;
+            break;
+        case "/":
+            if ($second == 0) {
+                echo "You cannot perform this operation";
+                die(); // Exits the program if divsor is 0
+            } else {
+                $result = $first / $second;
+            }
+            break;
+        case "*":
+            $result = $first * $second;
+            break;
+    }
+    echo "The result is " . $result . "\n\n";
+}
+
+// Calculating loop
+do {
+  echo "Pick the first number: \n"; 
+  $first = promptNumber();
+  
+  echo "Pick the second number: \n"; 
+  $second = promptNumber();
+  
+  echo "Pick the operator: \n";  
+  $operator = promptOperator();
+  
+  calculate($first, $second, $operator); 
+
+  echo "Would you like to calculate more?(y/n): \n";
+  $answer = promptNextCalculation();
+  
+  calculateMore($answer);
+  
+} while ($calculateMore = true);
