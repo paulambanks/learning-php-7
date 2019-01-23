@@ -1,0 +1,86 @@
+body {
+    background: #fff;
+    font-family: sans-serif;
+    padding: 0 5%;
+}
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+.nav-list-item {
+    float: left;
+}
+.nav-list-item-link {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+/* Change the link color to #111 (black) on hover */
+.nav-list-item-link:hover {
+    background-color: #111;
+}
+
+header,
+page-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+main {
+    width: 80%;
+    margin: 0 auto;
+}
+.page-title {
+    text-align: center;
+    color: #333;
+    font-weight: normal;
+}
+.page-intro {
+    line-height: 150%;
+    text-align: center;
+}
+
+section {
+    margin-top: 10%;
+}
+.section-title {
+    text-align: center;
+}
+.section-underline {
+    border-color: purple;
+}
+.cinnamon-roll-picture img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  
+}
+.cinnamon-text {
+    text-align: center;
+}
+.orange-button {
+    width: 300px;
+    background-color: #333;
+    margin: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+.recipe-button > a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+}
