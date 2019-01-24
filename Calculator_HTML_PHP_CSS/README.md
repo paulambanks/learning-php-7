@@ -8,7 +8,6 @@ Docker image with PHP 7, Apache, and XDebug.
 * docker-compose.yml (Launches the apache webserver on port 80 and the 'src' directory is mapped to '/var/www/html')
 * xdebug-custom.ini (Allows XDebug to connect to the host on port 9000, so IDE's can use XDebug)
 * src (PHP application sources go here)
-* src/index.php (Text php application prints phpinfo())
 
 ## Quick Commands
 
