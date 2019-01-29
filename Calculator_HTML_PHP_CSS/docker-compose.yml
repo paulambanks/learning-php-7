@@ -8,3 +8,13 @@ services:
         target: /var/www/html
     ports:
       - "80:80"
+  composer:
+    image: composer:latest
+    user: "501:20"
+    command: composer install
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+
+  
