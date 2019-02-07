@@ -14,8 +14,18 @@
         </header>
 
         <main class="page-container">
-            
-            
+            <section>
+                <article>
+                    <h2>THE PACK</h2>
+                    <p>The standard 52-card pack, randomly shuffled is used.</p>
+                    <?php include("cardDeck.php");
+                    $deck = new Deck(); // create new object
+                    $deck->shuffle();
+                    foreach ($deck as $index => $card) { ?>
+                        <p><?php echo "$index: $card";?></p>
+                    <?php } ?>
+                </article>
+            </section>
       
         </main>
 
